@@ -3,25 +3,37 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {useState,useEffect} from 'react'
 
-export default function Home() {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-   const fetchTodos = async () => {
-
-    //timeout used to illustrate if we had slow interbet connection
-    //this much time delay would damage both UX and SEO
-    
-    setTimeout(async () =>{
-      const res = await fetch('https://jsonplaceholder.typicode.com/todos')
+//we can do the SSR using a special function called getServerSideProps
+export async function getServerSideProps(){
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos')
       const data = await res.json()
-      console.log(data);
-      setTodos(data)
+      //the pre-rendered data is available in form of props
+      return {
+        props:{
+          todos: data
+        }
+      }
+}
 
-    },3000)
-  }
-  fetchTodos()
-  }, []);
+export default function Home({todos}) {
+  // const [todos, setTodos] = useState([]);
+
+  // useEffect(() => {
+  //  const fetchTodos = async () => {
+
+  //   //timeout used to illustrate if we had slow interbet connection
+  //   //this much time delay would damage both UX and SEO
+
+  //   setTimeout(async () =>{
+  //     const res = await fetch('https://jsonplaceholder.typicode.com/todos')
+  //     const data = await res.json()
+  //     console.log(data);
+  //     setTodos(data)
+
+  //   },3000)
+  // }
+  // fetchTodos()
+  // }, []);
   return (
     <div className={styles.container}>
       <Head>
@@ -30,10 +42,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {todos.length === 0 ? (
+      {todos?.length === 0 ? (
+        // the ? after todos is optional chaining bcz at very beginning of page loaidng todos may be undefined till props is not fetched so just protecting page from splitting error
         <div>Loading...</div>
       ) : (
-        todos.map(todo => (
+        todos?.map(todo => (
           <div key={todo.id}>
             <p>
               {todo.id}:{todo.title}

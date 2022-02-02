@@ -15,3 +15,5 @@ This great server has high speed internet,fast cpu and has job to pre-built a pa
 This is results in faster page load, time to interact with page is less and much better UX as user will come to that page and immediately see it working;no loading thing
 
 This also results in better SEO performance as when google web crawlers come to our page , instead of seeing a loading state they see an entire page at once(although they can support PWAs and can wait for sometime but here,score is obvioulsy better )
+
+Everytime user requests for this page,it's pre-built on server
