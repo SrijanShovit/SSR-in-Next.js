@@ -1,0 +1,17 @@
+When u typically use React w/o any framework like Next.js ,  the entire bundle gets delivered to the user whenever they come to the website.
+
+This is ok with small websites but as app gets bigger it slows down
+
+JS code initially can take a long time to load on a browser
+
+When the browser is pulling in the javascript that needs to be on the screen we see a spinner or loading,but this is not good user experience; user wants to come on website and boom everything is working
+
+This is where Server Side Rendering using next js comes to play
+When a user visits a web page that individual page is going to be built as next js has page splitting by default
+
+So that one page is gonna pre-built on a really fast server like Vercel
+This great server has high speed internet,fast cpu and has job to pre-built a page whereas a browser is not that fast
+
+This is results in faster page load, time to interact with page is less and much better UX as user will come to that page and immediately see it working;no loading thing
+
+This also results in better SEO performance as when google web crawlers come to our page , instead of seeing a loading state they see an entire page at once(although they can support PWAs and can wait for sometime but here,score is obvioulsy better )
